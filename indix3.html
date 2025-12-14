@@ -1,0 +1,2177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;800&display=swap" rel="stylesheet">
+
+<title>PokecomasGo</title>
+
+<style>
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+
+    /* 🔥 DEGRADADO BASE DE RESPALDO */
+    background: linear-gradient(
+        180deg,
+        #0b2d5a 0%,    /* azul profundo */
+        #1b4f8f 35%,   /* azul medio */
+        #6d1547 75%,   /* morado/rosado */
+        #2b0f3a 100%   /* oscuro final */
+    );
+}
+
+
+/* ============================= */
+/*            HERO               */
+/* ============================= */
+#hero {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+}
+
+#hero img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center top;
+}
+
+/* ============================= */
+/*     CONTENT BLOCK + FONDO     */
+/* ============================= */
+.content-block {
+    width: 100%;
+    background-image: url("background8.png");
+    background-size: cover;
+    background-position: center 100px; /* 🌟 BAJA EL FONDO */
+    background-repeat: no-repeat;
+
+    padding-top: 180px;
+    padding-bottom: 150px;
+
+    min-height: calc(100vh + 400px);
+    margin-top: -350px;
+
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+/* ============================= */
+/*             LOGO              */
+/* ============================= */
+.content-block .logo {
+    width: 500px;
+    filter: drop-shadow(0 0 15px black);
+    margin-bottom: 50px;
+}
+
+/* ============================= */
+/*             DIV1              */
+/* ============================= */
+.card {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.texto-superpuesto {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    filter: drop-shadow(0px 3px 2px rgba(0, 0, 0, 0.65));
+}
+
+/* SUB1 */
+.sub1 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 44px;
+    text-transform: uppercase;
+    color: white;
+    filter: drop-shadow(0px 2px 1px rgba(0, 0, 0, .7));
+    margin-bottom: 10px;
+    white-space: nowrap;
+}
+
+/* TITULO PRINCIPAL */
+.titulo-principal {
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 50px;
+    line-height: 77px;
+    text-transform: uppercase;
+
+    background: linear-gradient(90deg, #e0b96c, #ffdcb5 35%, #e0b96c 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    filter: drop-shadow(0px 2px 1px rgba(0, 0, 0, .7));
+    margin: 0;
+    white-space: nowrap;
+}
+
+/* SUB2 */
+.sub2 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    text-transform: none;
+
+    color: white;
+    filter: drop-shadow(0px 2px 1px rgba(0, 0, 0, .7));
+    margin-top: 12px;
+    white-space: nowrap;
+}
+
+
+/* ============================ */
+/*      LEYENDAS STYLE          */
+/* ============================ */
+.legend-container {
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.legend {
+    padding: 6px 14px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 700;
+    margin: 0 8px;
+    display: inline-block;
+    font-family: 'Lato', sans-serif;
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .4));
+}
+
+.legend.admin { background: #c0392b; }
+.legend.asiste { background: #27ae60; }
+.legend.casual { background: #2980b9; }
+
+/* ============================ */
+/*         TABLA STYLE          */
+/* ============================ */
+.table-container {
+    width: 90%;
+    max-width: 900px;
+    margin: 40px auto;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 20px;
+    border-radius: 16px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+#tablaRegistros {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+    font-family: 'Lato', sans-serif;
+}
+
+/* Encabezados */
+#tablaRegistros th {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 12px;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 16px;
+}
+
+/* Celdas */
+#tablaRegistros td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.25s ease-in-out; /* ⭐ Fade suave */
+}
+
+/* ============================ */
+/*     COLORES DE FILA          */
+/* ============================ */
+
+/* Fondo rojo permanente (Admins) */
+tr.administrador td {
+    background: rgba(255, 0, 0, 0.75) !important;
+}
+
+/* Fondo verde permanente (Asistencias ≥ 3) */
+tr.asistencias-altas td {
+    background: rgba(0, 255, 85, 0.75) !important;
+}
+
+/* ============================ */
+/*   HOVERS ESPECIALES           */
+/* ============================ */
+
+/* 🔴 Hover Administrador */
+tr.administrador:hover td {
+    background: rgba(255, 120, 120, 0.9) !important;
+}
+
+/* 🟢 Hover asistencia alta */
+tr.asistencias-altas:hover td {
+    background: rgba(120, 255, 180, 0.9) !important;
+}
+
+/* ⚪ Hover para filas normales */
+#tablaRegistros tr:not(.administrador):not(.asistencias-altas):hover td {
+    background: rgba(255,255,255,0.15) !important;
+}
+
+/* ============================ */
+/*         TOAST                */
+/* ============================ */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(0,0,0,0.75);
+    padding: 12px 22px;
+    color: white;
+    border-radius: 12px;
+    font-size: 16px;
+    opacity: 0;
+    backdrop-filter: blur(3px);
+    transition: all 0.35s ease-in-out;
+    z-index: 9999;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0px);
+}
+
+
+/* Ocultar columna Campfire */
+#tablaRegistros th:nth-child(4),
+#tablaRegistros td:nth-child(4) {
+    display: none;
+}
+
+/* ============================= */
+/*       BOTÓN COPIAR STYLE      */
+/* ============================= */
+
+.copy-btn {
+    padding: 6px 14px;
+    margin-left: 8px;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: white;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    
+    backdrop-filter: blur(4px);
+    transition: all 0.2s ease-in-out;
+}
+
+.copy-btn:hover {
+    background: rgba(255,255,255,0.35);
+    transform: scale(1.05);
+}
+
+.copy-btn:active {
+    transform: scale(0.95);
+}
+
+/* ============================= */
+/*        PAGINACIÓN STYLE       */
+/* ============================= */
+
+#paginador {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+/* ============================= */
+/*        PAGINACIÓN STYLE       */
+/* ============================= */
+
+#paginador {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pagina-btn {
+    padding: 8px 14px;
+    background: rgba(255, 196, 0, 0.315); /* ✔ Glass suave */
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    color: #ffe8b3; /* ✔ Dorado suave Pokémon */
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    border-radius: 12px;
+    cursor: pointer;
+
+    backdrop-filter: blur(6px); /* ✔ efecto cristal */
+    transition: all 0.25s ease-in-out;
+}
+
+/* Hover elegante */
+.pagina-btn:hover {
+    background: rgba(255, 123, 0, 0.637);
+    transform: scale(1.1);
+}
+
+/* Botón activo – dorado Pokémon brillante */
+.pagina-btn.active {
+    background: rgba(255, 210, 120, 0.753);
+    color: white;
+    border-color: rgba(255, 230, 170, 0.9);
+    box-shadow: 0 0 12px rgb(255, 220, 160);
+    transform: scale(1.15);
+}
+
+
+.paginador-oculto {
+    display: none !important;
+}
+
+#tablaRegistros td {
+    text-transform: capitalize;
+}
+
+
+/* ============================
+   BOTÓN ABRIR MODAL
+============================ */
+.open-modal-btn {
+  margin-top: 40px;
+    padding: 16px 36px;
+    background: linear-gradient(90deg, #ffe27a, #ffd048);
+    border-radius: 20px;
+    color: #5a3a00;
+    font-size: 22px;
+    font-weight: 900;
+
+    border: 2px solid #fff2a0;
+    cursor: pointer;
+    transition: 0.3s;
+
+    box-shadow:
+        0 0 12px #ffe27a,
+        0 0 22px #5c80b1;
+}
+.open-modal-btn:hover {
+    transform: scale(1.1);
+    box-shadow:
+        0 0 20px #ffe27a,
+        0 0 45px #0d5f99;
+}
+
+
+
+
+/* ============================
+     MODAL OVERLAY
+============================ */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 5, 30, 0.75);
+    backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+
+/* ============================
+        MODAL BOX
+============================ */
+.modal-box {
+    background: linear-gradient(135deg, rgba(20,55,110,0.55), rgba(140,20,80,0.55));
+    padding: 40px;
+    width: 90%;
+    max-width: 720px;
+
+     max-height: 85vh;    /* No crece más del 85% de la pantalla */
+    overflow-y: auto;    /* Scroll interno */
+    border-radius: 24px;
+    border: 2px solid rgba(255,220,120,0.45);
+
+    box-shadow:
+        0 0 20px rgba(255, 232, 150, 0.35),
+        0 0 45px rgba(0, 80, 150, 0.35);
+
+    backdrop-filter: blur(14px);
+    position: relative;
+    animation: fadeIn 0.25s ease-out;
+}
+
+
+@keyframes fadeIn {
+    from { transform: scale(0.92); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Cerrar modal */
+.close-modal {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 34px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+    text-shadow: 0 0 8px rgba(255,220,120,0.6);
+}
+.close-modal:hover {
+    color: #ffe27a;
+    transform: scale(1.15);
+}
+
+
+/* Título */
+.modal-title {
+    font-size: 34px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #ffe8a3;
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: 1px;
+    text-shadow: 0 0 6px rgba(255,218,120,0.7);
+}
+
+
+/* ============================
+        FORMULARIO
+============================ */
+.modal-form-row {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.form-column {
+    flex: 1;
+    min-width: 260px; /* así nunca se enciman */
+}
+
+.form-column input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+label {
+    display: block;
+    color: #fff7cc;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+
+    background: rgba(12,50,100,0.35);
+    border: 1px solid rgba(255,220,120,0.4);
+    color: white;
+
+    margin-bottom: 15px;
+    transition: 0.25s;
+}
+
+input:focus {
+    outline: none;
+    background: rgba(15,70,130,0.45);
+    border-color: #ffe27a;
+    box-shadow:
+        0 0 10px rgba(255,228,120,0.8),
+        0 0 20px rgba(120,200,255,0.5);
+}
+
+
+/* ============================
+        AGREGAR CÓDIGO
+============================ */
+.add-code-btn {
+    padding: 10px 16px;
+    background: linear-gradient(90deg, #829ec3, #5c80b1);
+    border: 1px solid rgba(255,220,120,0.5);
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.25s;
+    font-weight: 700;
+}
+
+.add-code-btn:hover {
+    background: linear-gradient(90deg, #a0c4cb, #829ec3);
+    transform: scale(1.07);
+    box-shadow: 
+        0 0 10px rgba(255, 232, 140, 0.7),
+        0 0 20px rgba(100,180,255,0.5);
+}
+
+/* ============================
+        BOTÓN ENVIAR
+============================ */
+.send-all-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(90deg, #6d1547, #123f82);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: white;
+    border-radius: 14px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 18px;
+    transition: 0.3s;
+}
+
+.send-all-btn:hover {
+    background: linear-gradient(90deg, #b5114a, #06497a);
+    transform: scale(1.05);
+    box-shadow: 0 0 14px rgba(246,255,0,0.7);
+}
+
+/* Scroll del MODAL: muy fino */
+.modal-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Riel del scroll (fondo) */
+.modal-box::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+}
+
+/* Pulgar del scroll (barra que se mueve) */
+.modal-box::-webkit-scrollbar-thumb {
+    background: #6d1547;
+}
+.modal-box::-webkit-scrollbar-thumb:hover {
+    background: #8a1f64;
+}
+
+/* 🔴 Campo duplicado */
+.input-error {
+    border: 2px solid #ff5555 !important;
+    background: rgba(255,50,50,0.25) !important;
+}
+
+/* 🟢 Campo correcto */
+.input-ok {
+    border: 2px solid #7dff7d !important;
+    background: rgba(50,255,50,0.20) !important;
+}
+
+.extra-block {
+    margin-top: 10px;
+}
+
+.extra-row {
+    position: relative;
+    align-items: center;
+}
+
+/* Botón eliminar bloque extra */
+.remove-block-btn {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.7);
+    background: radial-gradient(circle, #ff6b6b, #b5114a);
+    color: #fff;
+    font-weight: 900;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.remove-block-btn:hover {
+    transform: scale(1.08);
+    background: radial-gradient(circle, #ff8585, #d31750);
+    box-shadow: 0 0 10px rgba(255,120,120,0.9);
+}
+
+/* ============================
+    AVISO INFORMATIVO
+============================ */
+.modal-info-box {
+    margin-top: 25px;
+    padding: 16px 20px;
+    background: rgba(255, 245, 200, 0.15);
+    border-left: 4px solid #ffe27a;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+
+    backdrop-filter: blur(6px);
+    text-shadow: 0 0 6px rgba(255,220,120,0.45);
+    box-shadow:
+        0 0 10px rgba(255, 230, 150, 0.25),
+        inset 0 0 12px rgba(255, 230, 150, 0.15);
+}
+
+
+::placeholder {
+    color: #ffeac7;
+    opacity: 0.65;
+    font-weight: 600;
+}
+
+/* TARJETA POKÉMON GO */
+.parque-card {
+    width: 100%;
+    max-width: 1100px;
+    margin: 60px auto;
+    perspective: 1400px;
+}
+
+.parque-card-inner {
+    width: 100%;
+    height: 420px;
+    position: relative;
+    transition: transform 1s ease;
+    transform-style: preserve-3d;
+}
+
+.parque-card.flip .parque-card-inner {
+    transform: rotateY(180deg);
+}
+
+.parque-card-front,
+.parque-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 28px;
+    backface-visibility: hidden;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+    border: 2px solid rgba(255,120,180,0.35); /* borde rosado oficial */
+}
+
+/* 📌 FRENTE */
+.parque-card-front {
+    display: flex;
+    background: #1b0044;
+    position: relative;
+}
+
+.parque-img {
+    width: 55%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.92);
+}
+
+/* SVG estilo Pokémon GO */
+.svg-deco {
+    position: absolute;
+    top: -20%;
+    left: -2%;
+    height: 140%;        /* ⚡ SVG más grande */
+    width: auto;
+
+    opacity: 1;
+    pointer-events: none;
+}
+
+
+/* 📌 INFO */
+.parque-info {
+    width: 45%;
+    padding: 60px 40px 40px 40px;
+    color: white;
+    position: relative;
+}
+
+.parque-info h2 {
+    font-size: 42px;
+    margin: 0 0 10px;
+    text-shadow: 0px 2px 6px rgba(0,0,0,0.45);
+}
+
+.parque-info p {
+    font-size: 17px;
+    margin-bottom: 24px;
+    opacity: 0.9;
+}
+
+/* ICONO POKEBOLA */
+.poke-icon {
+    position: absolute;
+    top: 20px;
+    right: 22px;
+    width: 42px;
+    opacity: 0.8;
+}
+
+/* BOTONES */
+.btn-info, .btn-maps {
+    padding: 12px 28px;
+    border-radius: 14px;
+    border: none;
+    background: linear-gradient(90deg,#ffe27a,#ffd048);
+    color: #532a00;
+    font-weight: 900;
+    cursor: pointer;
+    transition: .25s;
+    margin-right: 10px;
+}
+
+.btn-info:hover,
+.btn-maps:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 16px rgba(255,220,120,0.9);
+}
+
+/* 📌 BOTÓN COMO LLEGAR EN EL FRENTE */
+.front-buttons {
+    margin-top: 20px;
+}
+
+/* 📌 DORSO */
+.parque-card-back {
+    background: radial-gradient(circle at top left,#1f4287,#120c24);
+    color: white;
+    transform: rotateY(180deg);
+    padding: 50px;
+}
+
+.detalle-lista {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 25px;
+}
+
+.detalle-lista li {
+    margin-bottom: 12px;
+    font-size: 19px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 6px;
+}
+
+/* RESPONSIVE */
+@media(max-width: 900px){
+    .parque-card-inner {
+        height: 650px;
+    }
+    .parque-card-front {
+        flex-direction: column;
+    }
+    .parque-img {
+        width: 100%;
+        height: 220px;
+    }
+    .parque-info {
+        width: 100%;
+        padding: 30px;
+        text-align: center;
+    }
+    .poke-icon {
+       right: 50%;
+       transform: translateX(50%);
+    }
+}
+
+/* =============================
+   SECCIÓN ALEGRE POKÉCOMAS
+============================= */
+.join-section {
+    text-align: center;
+    margin-top: 120px;
+    margin-bottom: 80px;
+    position: relative;
+}
+
+.join-banderines {
+    width: 60%;
+    max-width: 600px;
+    opacity: 0.9;
+    margin-bottom: -20px;
+    pointer-events: none;
+}
+
+/* Título alegre */
+.join-title {
+    font-size: 48px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #ffeaa7;
+    text-shadow:
+        0 0 10px rgba(255,240,150,0.9),
+        0 0 25px rgba(255,200,100,0.4);
+
+    animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0% { text-shadow: 0 0 12px rgba(255,230,130,.8); }
+    50% { text-shadow: 0 0 22px rgba(255,190,80,.9); }
+    100% { text-shadow: 0 0 12px rgba(255,230,130,.8); }
+}
+
+.join-sub {
+    font-size: 20px;
+    color: white;
+    opacity: 0.9;
+    max-width: 680px;
+    margin: 15px auto 35px auto;
+    line-height: 1.5;
+}
+
+
+/* =============================
+   BOTONES MEJORADOS
+============================= */
+
+.store-btn {
+    background: #243b55;
+    padding: 14px 26px;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+
+    box-shadow:
+        0 4px 14px rgba(0,0,0,.25),
+        inset 0 0 8px rgba(255,255,255,0.1);
+
+    transition: 0.25s ease;
+    min-width: 260px;
+}
+
+/* Variación alegre */
+.store-btn.joy {
+    background: linear-gradient(90deg, #214a8d, #5c1d71);
+    border: 2px solid rgba(255,220,120,0.35);
+    box-shadow:
+        0 0 12px rgba(255,200,120,0.4),
+        0 0 22px rgba(100,140,255,0.35);
+}
+
+.store-btn:hover {
+    transform: scale(1.06);
+    box-shadow:
+        0 0 20px rgba(255,200,120,0.7),
+        0 0 35px rgba(120,170,255,0.5);
+}
+
+/* Íconos */
+.store-icon {
+    width: 32px;
+}
+
+/* Texto doble */
+.btn-text {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-title {
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.btn-sub {
+    font-size: 13px;
+    opacity: .85;
+}
+
+/* Responsive */
+@media(max-width: 650px) {
+    .join-title { font-size: 32px; }
+    .join-sub { font-size: 17px; }
+
+    .store-btn {
+        width: 90%;
+        justify-content: center;
+    }
+
+    .btn-text { text-align: center; }
+}
+
+/* =============================
+   CONTENEDOR REDES HORIZONTAL
+============================= */
+.social-circle-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    flex-wrap: nowrap;
+}
+
+/* =============================
+   CÍRCULO MINIMAL 3 CAPAS
+============================= */
+.social-circle {
+    width: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    transition: transform 0.25s ease;
+}
+
+
+
+/* Círculo central */
+.circle-icon {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 18px;
+}
+
+/* Anillo medio */
+.circle-icon::before {
+    content: "";
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+}
+
+/* Anillo externo */
+.circle-icon::after {
+    content: "";
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+}
+
+/* Icono */
+.circle-icon img {
+    width: 28px;
+    height: 28px;
+    z-index: 2;
+}
+
+/* =============================
+   TEXTO REDES (BLANCO + GRUESO)
+============================= */
+.social-circle span {
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;              /* 🔑 MÁS GRUESO REAL */
+    font-size: 15px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    line-height: 1.2;
+
+    color: #ffffff;                /* 🔑 BLANCO PURO */
+
+    text-shadow:
+        0 1px 0 rgba(0,0,0,0.35),
+        0 2px 4px rgba(0,0,0,0.35);
+}
+
+/* Hover anillos */
+.social-circle:hover .circle-icon::before {
+    background: rgba(255,255,255,0.45);
+}
+.social-circle:hover .circle-icon::after {
+    background: rgba(255,255,255,0.25);
+}
+
+/* =============================
+   RESPONSIVE MÓVIL
+============================= */
+@media (max-width: 768px) {
+    .social-circle-container {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding: 0 20px;
+        gap: 40px;
+    }
+
+    .social-circle {
+        width: 110px;
+    }
+
+    .social-circle span {
+        font-size: 14px;
+    }
+}
+
+/* =============================
+   SECCIÓN HEADER REDES
+============================= */
+.social-circle-section {
+    margin-top: 120px;
+    margin-bottom: 100px;
+    text-align: center;
+}
+
+.social-kicker {
+    font-family: 'Lato', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: white;
+    margin-bottom: 10px;
+    filter: drop-shadow(0px 2px 1px rgba(0,0,0,.7));
+}
+
+.social-title-gradient {
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: 46px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    margin: 0;
+
+    background: linear-gradient(
+        90deg,
+        #e0b96c,
+        #ffdcb5 35%,
+        #e0b96c 70%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    filter: drop-shadow(0px 2px 1px rgba(0,0,0,.7));
+}
+
+.social-subtitle-gradient {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    max-width: 760px;
+    margin: 14px auto 45px auto;
+    color: white;
+    opacity: 0.95;
+    filter: drop-shadow(0px 2px 1px rgba(0,0,0,.65));
+}
+
+@media (max-width: 768px) {
+    .social-title-gradient {
+        font-size: 32px;
+    }
+
+    .social-subtitle-gradient {
+        font-size: 18px;
+        padding: 0 16px;
+    }
+
+    .social-kicker {
+        font-size: 16px;
+    }
+}
+
+
+/* =============================
+   CAMPFIRE (NIANTIC)
+============================= */
+.social-circle.campfire .circle-icon {
+    background: #ff6a00; /* naranja Campfire */
+}
+
+.social-circle.campfire .circle-icon::before {
+    background: rgba(255, 140, 60, 0.45);
+}
+
+.social-circle.campfire .circle-icon::after {
+    background: rgba(255, 140, 60, 0.25);
+}
+
+/* =================================================
+   📱 RESPONSIVE GLOBAL – POKECOMAS GO
+================================================= */
+
+/* -------------------------------
+   📱 CELULARES PEQUEÑOS (≤ 360px)
+-------------------------------- */
+@media (max-width: 360px) {
+
+    .content-block {
+        padding-top: 120px;
+        padding-bottom: 100px;
+        margin-top: -280px;
+    }
+
+    .content-block .logo {
+        width: 260px;
+        margin-bottom: 30px;
+    }
+
+    .texto-superpuesto {
+        position: static;
+        transform: none;
+        padding: 20px 10px;
+    }
+
+    .sub1 {
+        font-size: 20px;
+        line-height: 26px;
+        white-space: normal;
+    }
+
+    .titulo-principal {
+        font-size: 26px;
+        line-height: 32px;
+        white-space: normal;
+    }
+
+    .sub2 {
+        font-size: 15px;
+        line-height: 20px;
+        white-space: normal;
+    }
+
+    .open-modal-btn {
+        font-size: 16px;
+        padding: 12px 24px;
+    }
+
+    /* Tabla scrollable */
+    .table-container {
+        overflow-x: auto;
+    }
+
+    #tablaRegistros {
+        min-width: 600px;
+    }
+
+    /* Modal */
+    .modal-box {
+        padding: 20px;
+        max-height: 90vh;
+    }
+
+    .modal-title {
+        font-size: 22px;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    input {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .send-all-btn {
+        font-size: 16px;
+    }
+}
+
+/* --------------------------------
+   📱 CELULARES MEDIANOS (361–480px)
+--------------------------------- */
+@media (max-width: 480px) {
+
+    .content-block .logo {
+        width: 300px;
+    }
+
+    .sub1 {
+        font-size: 22px;
+        white-space: normal;
+    }
+
+    .titulo-principal {
+        font-size: 30px;
+        line-height: 36px;
+        white-space: normal;
+    }
+
+    .sub2 {
+        font-size: 16px;
+        white-space: normal;
+    }
+
+    .texto-superpuesto {
+        position: static;
+        transform: none;
+        padding: 20px;
+    }
+
+    .open-modal-btn {
+        font-size: 18px;
+    }
+
+    .modal-box {
+        padding: 26px;
+    }
+
+    .modal-title {
+        font-size: 26px;
+    }
+
+    /* Redes */
+    .social-circle-container {
+        gap: 26px;
+    }
+
+    .social-circle {
+        width: 100px;
+    }
+}
+
+/* --------------------------------
+   📱 CELULARES GRANDES (481–600px)
+--------------------------------- */
+@media (max-width: 600px) {
+
+    .content-block .logo {
+        width: 340px;
+    }
+
+    .titulo-principal {
+        font-size: 34px;
+        line-height: 42px;
+        white-space: normal;
+    }
+
+    .sub1 {
+        font-size: 24px;
+    }
+
+    .sub2 {
+        font-size: 18px;
+    }
+
+    .open-modal-btn {
+        font-size: 20px;
+    }
+
+    .modal-box {
+        max-width: 95%;
+    }
+
+    .table-container {
+        overflow-x: auto;
+    }
+}
+
+/* --------------------------------
+   📲 TABLETS (601–900px)
+--------------------------------- */
+@media (max-width: 900px) {
+
+    .content-block {
+        padding-top: 150px;
+    }
+
+    .content-block .logo {
+        width: 400px;
+    }
+
+    .titulo-principal {
+        font-size: 40px;
+        line-height: 50px;
+        white-space: normal;
+    }
+
+    .sub1 {
+        font-size: 28px;
+    }
+
+    .sub2 {
+        font-size: 20px;
+    }
+
+    .modal-box {
+        max-width: 90%;
+    }
+
+    .table-container {
+        max-width: 95%;
+    }
+}
+
+/* --------------------------------
+   🧠 AJUSTES UNIVERSALES MOBILE
+--------------------------------- */
+@media (max-width: 768px) {
+
+    /* Quitar nowrap global en móvil */
+    .sub1,
+    .sub2,
+    .titulo-principal {
+        white-space: normal;
+    }
+
+    /* Botones siempre centrados */
+    button {
+        max-width: 100%;
+    }
+
+    /* Scroll horizontal limpio */
+    .table-container::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .table-container::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.3);
+        border-radius: 10px;
+    }
+}
+
+/* =================================================
+   🧾 TABLA RESPONSIVE SIN SCROLL + TEXTO CORTADO
+================================================= */
+
+/* Tabla fija: NO scroll horizontal */
+#tablaRegistros {
+    width: 100%;
+    table-layout: fixed; /* 🔑 CLAVE */
+}
+
+/* Ancho proporcional por columna */
+#tablaRegistros th:nth-child(1),
+#tablaRegistros td:nth-child(1) {
+    width: 30%; /* Nombre real */
+}
+
+#tablaRegistros th:nth-child(2),
+#tablaRegistros td:nth-child(2) {
+    width: 30%; /* Nombre Pokémon */
+}
+
+#tablaRegistros th:nth-child(3),
+#tablaRegistros td:nth-child(3) {
+    width: 40%; /* Código */
+}
+
+/* Texto truncado con ... */
+.td-ellipsis {
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* Tooltip SOLO cuando JS lo activa */
+.td-ellipsis.is-truncated:hover::after {
+    content: attr(data-full);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 8px;
+    white-space: normal;
+    max-width: 260px;
+    z-index: 50;
+    margin-top: 6px;
+    font-size: 13px;
+}
+
+
+
+/* Contenedor relativo para tooltip */
+#tablaRegistros td {
+    position: relative;
+}
+
+/* Código no se rompe */
+#tablaRegistros td:nth-child(3) span {
+    word-break: keep-all;
+    white-space: nowrap;
+}
+
+/* ================================
+   📱 AJUSTES MÓVIL
+================================ */
+@media (max-width: 600px) {
+
+    #tablaRegistros th {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    #tablaRegistros td {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .copy-btn {
+        font-size: 11px;
+        padding: 4px 8px;
+        margin-top: 4px;
+        display: block;
+    }
+}
+
+/* ================================
+   📱 BOTÓN COPIAR CENTRADO EN MÓVIL
+================================ */
+@media (max-width: 600px) {
+
+    /* Celda del código */
+    #tablaRegistros td:nth-child(3) {
+        text-align: center;
+    }
+
+    /* Código */
+    #tablaRegistros td:nth-child(3) span {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 700;
+    }
+
+    /* Botón copiar */
+    .copy-btn {
+        display: inline-block;
+        margin: 0 auto;
+    }
+}
+
+/* =================================
+   📱 HERO + LOGO FIX (NO TAPAR fondo.png)
+================================= */
+@media (max-width: 768px) {
+
+    /* Quitamos el solapamiento fuerte */
+    .content-block {
+        margin-top: -180px;   /* antes -350px */
+        padding-top: 140px;
+    }
+
+    /* Logo más pequeño y controlado */
+    .content-block .logo {
+        width: 240px;
+        margin-bottom: 28px;
+    }
+}
+
+@media (max-width: 360px) {
+
+    .content-block {
+        margin-top: -140px;
+        padding-top: 120px;
+    }
+
+    .content-block .logo {
+        width: 200px;
+    }
+}
+
+/* =================================
+   📱 SUBIR background8 EN MÓVIL
+================================= */
+@media (max-width: 768px) {
+
+    .content-block {
+        background-position: center top; /* 🔑 SUBE EL FONDO */
+        padding-top: 110px;              /* menos aire arriba */
+        margin-top: -200px;              /* une hero + content */
+    }
+}
+
+
+@media (max-width: 360px) {
+
+    .content-block {
+        background-position: center 0;
+        padding-top: 95px;
+        margin-top: -170px;
+    }
+}
+
+
+</style>
+</head>
+
+<body>
+
+<!-- ============================= -->
+<!--            HERO               -->
+<!-- ============================= -->
+<div id="hero">
+    <img src="fondo.png">
+</div>
+
+
+<!-- ============================= -->
+<!--   CONTENT BLOCK con fondo     -->
+<!-- ============================= -->
+<section class="content-block">
+
+    <!-- LOGO -->
+    <img class="logo" src="logopokecomas.png">
+
+    <!-- TARJETA DIV1 -->
+    <div class="card">
+        <img src="div2.png">
+<div class="texto-superpuesto">
+
+    <div class="sub1">ÚNETE A LA AVENTURA</div>
+
+    <h1 class="titulo-principal">BIENVENIDO A POKECOMAS GO</h1>
+
+    <div class="sub2">Forma parte de nuestra comunidad de entrenadores.</div>
+
+</div>
+    </div>
+
+    <button id="openModalBtn" class="open-modal-btn">Registrar Entrenador</button>
+
+    
+    <!-- ============================
+     MODAL REGISTRO
+============================ -->
+<div id="formModal" class="modal-overlay">
+  <div class="modal-box">
+
+    <span class="close-modal" id="closeModalBtn">&times;</span>
+
+    <h2 class="modal-title">Registro de Entrenadores</h2>
+
+ <!-- 🟦 FILA 1: Nombre Real – Campfire -->
+<div class="modal-form-row">
+  <div class="form-column">
+    <label>Nombre Real:</label>
+    <input type="text" id="nombreRealModal" placeholder="Nombre real" required>
+  </div>
+
+  <div class="form-column">
+    <label>ID Campfire (opcional):</label>
+    <input type="text" id="campfireModal" placeholder="ID Campfire (opcional)">
+  </div>
+</div>
+
+<!-- 🟪 FILA 2: Nombre en Pokémon – Código entrenador -->
+<div class="modal-form-row">
+  <div class="form-column">
+    <label>Nombre en Pokémon:</label>
+    <input type="text" class="nombrePokeInput" placeholder="Nombre en Pokémon" required>
+  </div>
+
+  <div class="form-column">
+    <label>Código de entrenador:</label>
+    <input type="text" class="codigoInput" maxlength="12" inputmode="numeric" placeholder="Código de entrenador (12 dígitos)" required>
+  </div>
+</div>
+
+
+    <!-- 🟨 CONTENEDOR DE CUENTAS EXTRA -->
+    <div id="extraAccountsContainer"></div>
+
+    <!-- BOTÓN AGREGAR OTRA CUENTA -->
+    <button id="addCodeBtn" class="add-code-btn">+ Agregar otra cuenta</button>
+
+    <div class="modal-info-box">
+    📢 Para participar en futuros sorteos y dinámicas de la comunidad,
+    asegúrate de registrar correctamente tu ID de Campfire.
+</div>
+
+
+    <!-- BOTÓN ENVIAR -->
+    <button id="sendAllBtn" class="send-all-btn">Registrar Cuentas</button>
+
+  </div>
+</div>
+
+
+
+    
+<!-- ============================ -->
+<!--       LEYENDAS               -->
+<!-- ============================ -->
+<div class="legend-container">
+  <span class="legend admin">Administrador</span>
+  <span class="legend asiste">Asiste</span>
+  <span class="legend casual">Casual</span>
+</div>
+
+<!-- ============================ -->
+<!--            TABLA             -->
+<!-- ============================ -->
+<div class="table-container">
+  <h2 class="titulo-principal">Códigos Entrenadores</h2>
+
+  <table id="tablaRegistros">
+    <thead>
+      <tr>
+        <th>Nombre Real</th>
+        <th>Nombre En Pokémon</th>
+        <th>Código Entrenador</th>
+        <th>Campfire</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div id="paginador" style="text-align:center;margin-top:15px;"></div>
+</div>
+
+<section class="social-circle-section">
+
+    
+     <div class="social-header">
+        <div class="social-kicker">ÚNETE A LA COMUNIDAD</div>
+
+        <h2 class="social-title-gradient">
+            CONECTA CON POKECOMAS GO
+        </h2>
+
+        <p class="social-subtitle-gradient">
+            Ven y únete a nuestra comunidad para jugar Pokémon GO
+            presencialmente en <strong>Comas</strong>.
+        </p>
+    </div>
+
+    <div class="social-circle-container">
+
+        <a href="https://instagram.com/TU_USUARIO"
+           target="_blank"
+           class="social-circle instagram">
+            <div class="circle-icon">
+                <img src="instagram.svg" alt="Instagram">
+            </div>
+            <span>Instagram</span>
+        </a>
+
+        <a href="https://tiktok.com/@TU_USUARIO"
+           target="_blank"
+           class="social-circle tiktok">
+            <div class="circle-icon">
+                <img src="tiktok.svg" alt="TikTok">
+            </div>
+            <span>TikTok</span>
+        </a>
+
+
+        <a href="https://campfire.nianticlabs.com/"
+   target="_blank"
+   class="social-circle campfire">
+    <div class="circle-icon">
+        <img src="campfire.svg" alt="Campfire">
+    </div>
+    <span>Campfire</span>
+</a>
+
+
+        <a href="https://facebook.com/TU_PAGINA"
+           target="_blank"
+           class="social-circle facebook">
+            <div class="circle-icon">
+                <img src="facebook.svg" alt="Facebook">
+            </div>
+            <span>Facebook</span>
+        </a>
+
+        <a href="https://whatsapp.com"
+           target="_blank"
+           class="social-circle whatsapp">
+            <div class="circle-icon">
+                <img src="whatsapp.svg" alt="WhatsApp">
+            </div>
+            <span>WhatsApp</span>
+        </a>
+
+    </div>
+</section>
+
+
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+function flipCard(btn){
+    const card = btn.closest(".parque-card");
+    card.classList.toggle("flip");
+}
+
+
+
+/* ============================
+   CONFIG
+============================ */
+const API = "https://script.google.com/macros/s/AKfycbw5s_ivntPFebuX7_kE9AnSekzkLkRhCT3YMra3mP2kJBoyixjx_WnSnYal-_M-RKiEvA/exec";
+
+
+function marcarError(input, mensaje) {
+    input.classList.remove("input-ok");
+    input.classList.add("input-error");
+    mostrarToast("⚠ " + mensaje);
+}
+
+function marcarOk(input) {
+    input.classList.remove("input-error");
+    input.classList.add("input-ok");
+}
+
+
+// ABRIR MODAL
+// ABRIR MODAL (limpia todo antes)
+document.getElementById("openModalBtn").onclick = () => {
+  const modal = document.getElementById("formModal");
+
+  // limpiar valores principales
+  document.getElementById("nombreRealModal").value = "";
+  document.getElementById("campfireModal").value = "";
+
+  // limpiar primera fila de nombre/código
+  const nombresPokeInputs = document.querySelectorAll(".nombrePokeInput");
+  const codigoInputs      = document.querySelectorAll(".codigoInput");
+
+  nombresPokeInputs.forEach(inp => {
+    inp.value = "";
+    inp.classList.remove("input-error","input-ok");
+  });
+
+  codigoInputs.forEach(inp => {
+    inp.value = "";
+    inp.classList.remove("input-error","input-ok");
+  });
+
+  // borrar bloques extra
+  const extras = document.querySelectorAll("#extraAccountsContainer .extra-block");
+  extras.forEach(e => e.remove());
+
+  modal.style.display = "flex";
+};
+
+
+// CERRAR MODAL
+document.getElementById("closeModalBtn").onclick = () => {
+  document.getElementById("formModal").style.display = "none";
+};
+
+// Cerrar al hacer clic afuera
+window.onclick = e => {
+  if (e.target === document.getElementById("formModal")) {
+    document.getElementById("formModal").style.display = "none";
+  }
+};
+
+// Agregar nuevo bloque de cuenta
+document.getElementById("addCodeBtn").onclick = () => {
+
+  const div = document.createElement("div");
+  div.classList.add("extra-block");
+
+  div.innerHTML = `
+    <div class="modal-form-row extra-row">
+      <div class="form-column">
+        <label>Nombre en Pokémon:</label>
+        <input type="text" class="nombrePokeInput" placeholder="Nombre en Pokémon">
+      </div>
+
+      <div class="form-column">
+        <label>Código de entrenador:</label>
+              <input type="text" class="codigoInput" maxlength="12" inputmode="numeric"
+             placeholder="Código de entrenador (12 dígitos)">
+      </div>
+
+      <button type="button" class="remove-block-btn" title="Eliminar cuenta">✕</button>
+    </div>
+  `;
+
+  document.getElementById("extraAccountsContainer").appendChild(div);
+};
+
+// Eliminar bloque extra al hacer click en la X
+document
+  .getElementById("extraAccountsContainer")
+  .addEventListener("click", (e) => {
+    if (e.target.classList.contains("remove-block-btn")) {
+      const block = e.target.closest(".extra-block");
+      if (block) block.remove();
+    }
+  });
+
+
+
+/* ============================
+   ENVIAR TODO (MODAL NUEVO)
+============================ */
+// Evento de Enviar Todo (validaciones)
+document.getElementById("sendAllBtn").onclick = async () => {
+    let nombreReal = document.getElementById("nombreRealModal").value.trim();
+    let campfire   = document.getElementById("campfireModal").value.trim();
+    let nombresPokeInputs = document.querySelectorAll(".nombrePokeInput");
+    let codigoInputs      = document.querySelectorAll(".codigoInput");
+    let nombresPoke = Array.from(nombresPokeInputs, i => i.value.trim());
+    let codigos     = Array.from(codigoInputs, i => i.value.trim());
+
+    // Limpiar estilos previos
+    nombresPokeInputs.forEach(i => i.classList.remove("input-error", "input-ok"));
+    codigoInputs.forEach(i => i.classList.remove("input-error", "input-ok"));
+
+    // VALIDACIONES
+    if (!nombreReal) {
+        mostrarToast("⚠ El nombre real es obligatorio");
+        return;
+    }
+
+    // Validar solo letras y tildes en Nombre Real
+    const nombreRealRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+    if (!nombreRealRegex.test(nombreReal)) {
+        mostrarToast("⚠ El nombre real solo puede contener letras y tildes (sin números ni símbolos)");
+        return;
+    }
+
+    if (!nombresPoke.every(name => name)) {
+        mostrarToast("⚠ Todos los campos de nombre en Pokémon son obligatorios");
+        return;
+    }
+
+    if (codigos.some(codigo => codigo.length !== 12 || !/^\d{12}$/.test(codigo))) {
+        mostrarToast("⚠ Todos los códigos deben ser de 12 dígitos");
+        return;
+    }
+
+    // Validar duplicados contra la base de datos
+    for (let i = 0; i < codigos.length; i++) {
+        let cod = codigos[i];
+        let name = nombresPoke[i].trim().toLowerCase();
+        let codInput = codigoInputs[i];
+        let nameInput = nombresPokeInputs[i];
+
+        // Duplicados
+        if (codigosExistentes.has(cod)) {
+            marcarError(codInput, "Código ya existe en la base");
+            return;
+        }
+
+        if (nombresPokemonExistentes.has(name)) {
+            marcarError(nameInput, "Nombre Pokémon ya registrado");
+            return;
+        }
+
+        // Duplicado interno en el formulario
+        for (let j = i + 1; j < codigos.length; j++) {
+            if (codigos[j] === cod) {
+                marcarError(codInput, "Código duplicado en el formulario");
+                marcarError(codigoInputs[j], "Código duplicado");
+                return;
+            }
+            if (nombresPoke[j].trim().toLowerCase() === name) {
+                marcarError(nameInput, "Nombre duplicado en el formulario");
+                marcarError(nombresPokeInputs[j], "Nombre duplicado");
+                return;
+            }
+        }
+
+        marcarOk(codInput);
+        marcarOk(nameInput);
+    }
+
+    mostrarToast("✔ Datos validados. Enviando...");
+
+    // Enviar al Google Sheets
+    for (let i = 0; i < codigos.length; i++) {
+        const url = `${API}?accion=guardar` +
+            `&nombre=${encodeURIComponent(nombreReal)}` +
+            `&pokemon=${encodeURIComponent(nombresPoke[i])}` +
+            `&codigo=${encodeURIComponent(codigos[i])}` +
+            `&campfire=${encodeURIComponent(campfire)}`;
+
+        await fetch(url);
+    }
+
+    mostrarToast("✔ Registro completado");
+
+    // Limpiar formulario
+    document.getElementById("nombreRealModal").value = "";
+    document.getElementById("campfireModal").value = "";
+    nombresPokeInputs[0].value = "";
+    codigoInputs[0].value = "";
+    nombresPokeInputs[0].classList.remove("input-error", "input-ok");
+    codigoInputs[0].classList.remove("input-error", "input-ok");
+
+    // Eliminar campos extra
+    const extras = document.querySelectorAll("#extraAccountsContainer .extra-block");
+    extras.forEach(e => e.remove());
+
+    // Cerrar modal
+    document.getElementById("formModal").style.display = "none";
+
+    cargarRegistros();
+};
+
+// Mostrar Toast
+function mostrarToast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 1800);
+}
+
+// Marcar error
+function marcarError(input, mensaje) {
+    input.classList.remove("input-ok");
+    input.classList.add("input-error");
+    mostrarToast("⚠ " + mensaje);
+}
+
+// Marcar OK
+function marcarOk(input) {
+    input.classList.remove("input-error");
+    input.classList.add("input-ok");
+}
+
+
+
+/* ============================
+   REGISTROS / TABLA
+============================ */
+let registrosGlobal=[];
+let paginaActual=1;
+const porPagina=10;
+
+// 🔍 Listas para detectar duplicados en la base
+let codigosExistentes = new Set();
+let nombresPokemonExistentes = new Set();
+
+
+async function cargarRegistros(){
+  try{
+    const res = await fetch(API+"?accion=obtener");
+    const registros = await res.json();
+
+    const admins  = registros.filter(r => r.rango === "Administrador");
+    const quedadas = registros.filter(r => r.rango === "Asiste a las quedadas");
+    const casuals = registros.filter(r => r.rango === "Casual");
+
+    quedadas.sort((a,b)=> (b.asistencias||0)-(a.asistencias||0));
+    registrosGlobal=[...admins,...quedadas,...casuals];
+    mostrarPagina(1);
+  } catch(err){
+    console.error("Error cargarRegistros:", err);
+  }
+
+  // Guardamos códigos y nombres existentes para validar duplicados
+codigosExistentes.clear();
+nombresPokemonExistentes.clear();
+
+registros.forEach(r => {
+    if (r.codigo) codigosExistentes.add(r.codigo.trim());
+    if (r.pokemon) nombresPokemonExistentes.add(r.pokemon.trim().toLowerCase());
+});
+
+}
+
+function mostrarPagina(num){
+  paginaActual=num;
+  const inicio=(num-1)*porPagina;
+  const datos=registrosGlobal.slice(inicio, inicio+porPagina);
+
+  const tbody=document.querySelector("#tablaRegistros tbody");
+  tbody.innerHTML="";
+datos.forEach(r=>{
+    const fila = document.createElement("tr");
+
+    // Normaliza el texto del rango
+    const rango = (r.rango || '').toLowerCase();
+
+    // 🎯 1. Si es Administrador → fila roja
+    if (rango.includes("administrador")) {
+        fila.classList.add("administrador");
+    }
+
+    // 🎯 2. Si tiene 3 o más asistencias → fila verde
+    if ((r.asistencias || 0) >= 3) {
+        fila.classList.add("asistencias-altas");
+    }
+
+    // 🎯 3. Los demás quedan normales
+  fila.innerHTML = `
+      <td>
+        <div class="td-ellipsis">
+          ${r.nombre}
+        </div>
+      </td>
+
+      <td>
+        <div class="td-ellipsis">
+          ${r.pokemon}
+        </div>
+      </td>
+
+      <td>
+        <span>${r.codigo}</span>
+        <button class="copy-btn" onclick="copiarTexto('${r.codigo}')">
+          Copiar
+        </button>
+      </td>
+
+      <td>${r.campfire || ""}</td>
+    `;
+
+    tbody.appendChild(fila);
+});
+
+  activarTooltipsSiTruncado();
+  generarPaginador();
+}
+
+function generarPaginador(){
+    const total = Math.ceil(registrosGlobal.length / porPagina);
+    const pag = document.getElementById("paginador");
+
+    pag.innerHTML = "";
+
+    // 👇 Ocultar si solo hay una página
+    if (total <= 1) {
+        pag.classList.add("paginador-oculto");
+        return;
+    } else {
+        pag.classList.remove("paginador-oculto");
+    }
+
+    // 👇 Crear botones de página
+    for (let i = 1; i <= total; i++) {
+        pag.innerHTML += `
+            <button onclick="mostrarPagina(${i})"
+                    class="pagina-btn ${i === paginaActual ? 'active' : ''}">
+                ${i}
+            </button>`;
+    }
+}
+
+
+function copiarTexto(texto){
+  navigator.clipboard.writeText(texto);
+  mostrarToast("Código copiado");
+}
+
+function mostrarToast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),1800);
+}
+
+/* Validación del formulario principal */
+const codigoMain = document.getElementById("codigo");
+if(codigoMain){
+  codigoMain.addEventListener("input", async function(){
+    const val=(this.value||'').trim();
+    const btn=document.getElementById("btnEnviar");
+    if(val.length!==12){ btn.disabled=true; return; }
+
+    try{
+      const res = await fetch(API+"?accion=validarCodigo&codigo="+encodeURIComponent(val));
+      const data = await res.json();
+      if(data.existe){
+        document.getElementById("mensaje").textContent="⚠ Ya registrado";
+        btn.disabled=true;
+      } else {
+        document.getElementById("mensaje").textContent="";
+        btn.disabled=false;
+      }
+    }catch(err){
+      console.error("Error validar codigo:", err);
+    }
+  });
+}
+
+/* Envío formulario principal */
+const registroForm = document.getElementById("registroForm");
+if(registroForm){
+  registroForm.addEventListener("submit", async e=>{
+    e.preventDefault();
+    const btn=document.getElementById("btnEnviar");
+    btn.textContent="Guardando...";
+    btn.disabled=true;
+
+    let nombre=encodeURIComponent(document.getElementById("nombre").value);
+    let pokemon=encodeURIComponent(document.getElementById("pokemon").value);
+    let codigo=encodeURIComponent(document.getElementById("codigo").value);
+    let campfire=encodeURIComponent(document.getElementById("campfire").value);
+
+    try{
+      const url=`${API}?accion=guardar&nombre=${nombre}&pokemon=${pokemon}&codigo=${codigo}&campfire=${campfire}`;
+      const res=await fetch(url);
+      const out=await res.json();
+      document.getElementById("mensaje").textContent=out.respuesta||'';
+      if(out.respuesta && out.respuesta.includes("✔")) registroForm.reset();
+      cargarRegistros();
+    } catch(err){
+      console.error("Error guardando:", err);
+      document.getElementById("mensaje").textContent="Error al guardar";
+    }
+
+    btn.textContent="Enviar";
+    btn.disabled=false;
+  });
+}
+
+function activarTooltipsSiTruncado() {
+    document.querySelectorAll('.td-ellipsis').forEach(el => {
+        // ¿El texto fue cortado?
+        if (el.scrollWidth > el.clientWidth) {
+            el.classList.add('is-truncated');
+            el.setAttribute('data-full', el.textContent.trim());
+        } else {
+            el.classList.remove('is-truncated');
+            el.removeAttribute('data-full');
+        }
+    });
+}
+
+cargarRegistros();
+
+
+
+
+</script>
+</body>
+</html>
